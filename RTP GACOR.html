@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 2px;
+            cursor: pointer;
+        }
+
+        #generateButton {
+            background-color: black;
+            color: white;
+        }
+
+        #copyButton {
+            background-color: grey;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 id="title" style="text-align:center">🔥POLA SLOT🔥</h2>
+
+    <table id="mainTable" border="1" style="width:100%">
+        <tr>
+            <td>Spin Manual</td>
+            <td>10x</td>
+            <td>✅DC ON</td>            
+        </tr>
+        <tr>
+            <td>Spin Turbo</td>
+            <td>20x</td>
+            <td>❌ DC OFF</td>       
+        </tr>
+        <tr>
+            <td>Spin Otomatis</td>
+            <td>30x</td>			
+            <td>✅ DC ON</td>
+        </tr>
+        <tr>
+            <td>Spin Manual</td>
+            <td>40x</td>			
+            <td>✅ DC ON</td>
+        </tr>
+        <tr>
+            <td>Spin Cepat</td>
+            <td>50x</td>			
+            <td>✅ DC ON</td>
+        </tr>
+    </table>
+
+    <button id="generateButton" onclick="generateRandom()">Generate</button>
+    <button id="copyButton" onclick="copyContent()">Copy</button>
+
+    <script>
+        const states = ['✅DC ON', '❌ DC OFF', '✅ DC ON'];
+        const multipliers = ['10x', '20x', '30x', '40x', '50x'];
+
+        function generateRandom() {
+            const rows = document.getElementById('mainTable').rows;
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].cells;
+                cells[1].innerText = multipliers[Math.floor(Math.random() * multipliers.length)];
+                cells[2].innerText = states[Math.floor(Math.random() * states.length)];
+            }
+        }
+
+        function copyContent() {
+            const title = document.getElementById('title').innerText;
+            const rows = Array.from(document.getElementById('mainTable').rows);
+            const tableText = rows.map(row => '| ' + Array.from(row.cells).map(cell => cell.innerText).join(' | ') + ' |').join('\n');
+            const textToCopy = title + '\n\n' + tableText;
+            
+            const textarea = document.createElement('textarea');  textarea.textContent = textToCopy;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            alert('Data telah disalin!');
+        }
+    </script>
+
+</body>
+</html>
